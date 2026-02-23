@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -20,6 +22,30 @@ public class DemoApplication {
 		String message="Hello World!";
 		return message;
 	}
-	
+	@GetMapping("/helllo")
+	public String rootEndpoint1(){
+		String message="Chamika Dissanayake";
+		return message;
+	}
+	@GetMapping("/greet")
+	public String rootEndpoint2(){
+		String message="WelCome to Spring Boot!";
+		return message;
+	}
+	 
+	 @GetMapping("/greet/{name}")
+    public String greetPerson(
+		@PathVariable String name,
+		@RequestParam(required = false) String message )
+		{
+		if (message== null || message.trim().isEmpty())  {
+			return "hello" +name +"!Welcome to Sring Boot!";
+		}
+		return "Hello, " + name + "!" +message;
+	 }
+
 
 }
+    
+    
+
